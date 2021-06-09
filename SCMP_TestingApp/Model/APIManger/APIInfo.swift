@@ -9,7 +9,7 @@ import Foundation
 
 struct APIInfo {
     
-    static let serviceDomain = "https://regres.in"
+    static let serviceDomain = "https://reqres.in"
 
     static let login = serviceDomain + "/api/login?delay=5"
 }
