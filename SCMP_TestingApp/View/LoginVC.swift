@@ -12,12 +12,14 @@ class LoginVC: UIViewController {
     weak var textAccount: UITextField?
     weak var textPassword: UITextField?
     weak var btnSubmit: UIButton?
+    var viewModel: LoginVMInterface?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         self.initView()
         self.autoToHideKeyboard()
+        self.viewModel = LoginVM()
     }
 
 
@@ -85,8 +87,8 @@ extension LoginVC {
     }
     
     @objc private func onClickSubmitButton(_ button: UIButton) {
-        
-        self.navigationController?.pushViewController(ResultVC(), animated: true)
+        self.viewModel?.login(account: "peter@klaven.com", password: "cityslicka123")
+//        self.navigationController?.pushViewController(ResultVC(), animated: true)
     }
     
     private func autoToHideKeyboard() {
