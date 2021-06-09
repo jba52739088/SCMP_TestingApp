@@ -8,10 +8,13 @@
 import Foundation
 
 protocol LoginVMInterface {
-    func login(account: String, password: String, completion: @escaping (Result<LoginToken>) -> ())
+    var apiFaildSubject: Subject<String> {get}
+    func login(account: String, password: String, completion: @escaping (String) -> ())
 }
     
 class LoginVM {
+    
+    let apiFaildSubject = Subject<String>()
     var loginRepository: LoginRepositoryInterface
     
     init(loginRepository: LoginRepositoryInterface = LoginRepository.shared) {
@@ -21,10 +24,19 @@ class LoginVM {
 }
 
 extension LoginVM: LoginVMInterface {
-    func login(account: String, password: String, completion: @escaping (Result<LoginToken>) -> ()) {
+    
+    
+    func login(account: String, password: String, completion: @escaping (String) -> ()) {
         DispatchQueue.global(qos: .background).async {
             self.loginRepository.login(account: account, password: password) { (result) in
-                //
+                switch result {
+                case .success(let token):
+                    DispatchQueue.main.async {
+                        completion(token.token)
+                    }
+                case .failure(let message):
+                    self.apiFaildSubject.value = message
+                }
             }
         }
     }

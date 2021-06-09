@@ -19,9 +19,7 @@ class LoginVC: UIViewController {
         self.view.backgroundColor = .white
         self.initView()
         self.autoToHideKeyboard()
-        self.viewModel = LoginVM()
     }
-
 
 }
 
@@ -87,8 +85,12 @@ extension LoginVC {
     }
     
     @objc private func onClickSubmitButton(_ button: UIButton) {
-        self.viewModel?.login(account: "peter@klaven.com", password: "cityslicka123")
-//        self.navigationController?.pushViewController(ResultVC(), animated: true)
+//        self.viewModel?.login(account: "peter@klaven.com", password: "cityslicka123") { [weak self] token in
+        self.viewModel?.login(account: self.textAccount?.text ?? "", password: self.textPassword?.text ?? "") { [weak self] token in
+            let resultVC = ResultVC()
+            resultVC.setToken(token)
+            self?.navigationController?.pushViewController(resultVC, animated: true)
+        }
     }
     
     private func autoToHideKeyboard() {
@@ -99,6 +101,19 @@ extension LoginVC {
     
     @objc private func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    private func subscriptVM() {
+        self.viewModel = LoginVM()
+        
+        self.viewModel?.apiFaildSubject.bind({ [weak self] _message in
+            guard let message = _message else { return }
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self?.present(alert, animated: true, completion: nil)
+            }
+        })
     }
 }
 
