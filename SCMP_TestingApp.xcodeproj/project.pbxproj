@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F944B0932670E92B00CECD6E /* Extension_UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F944B0922670E92B00CECD6E /* Extension_UIViewController.swift */; };
 		F94545032670AAD5005DFF6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94545022670AAD5005DFF6A /* AppDelegate.swift */; };
 		F94545072670AAD5005DFF6A /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94545062670AAD5005DFF6A /* LoginVC.swift */; };
 		F945450A2670AAD5005DFF6A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94545082670AAD5005DFF6A /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F944B0922670E92B00CECD6E /* Extension_UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_UIViewController.swift; sourceTree = "<group>"; };
 		F94544FF2670AAD5005DFF6A /* SCMP_TestingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SCMP_TestingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F94545022670AAD5005DFF6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F94545062670AAD5005DFF6A /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				F945451D2670B310005DFF6A /* Extension_UIImage.swift */,
+				F944B0922670E92B00CECD6E /* Extension_UIViewController.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F944B0932670E92B00CECD6E /* Extension_UIViewController.swift in Sources */,
 				F94545322670BE4C005DFF6A /* APIManger.swift in Sources */,
 				F9AEF86C2670CB3E003EB7CF /* Subject.swift in Sources */,
 				F94545262670BC0C005DFF6A /* ResultVC.swift in Sources */,

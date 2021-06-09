@@ -12,6 +12,9 @@ class LoginVC: UIViewController {
     weak var textAccount: UITextField?
     weak var textPassword: UITextField?
     weak var btnSubmit: UIButton?
+    weak var viewLoading: UIView?
+    weak var activityIndicator: UIActivityIndicatorView?
+    
     var viewModel: LoginVMInterface?
 
     override func viewDidLoad() {
@@ -19,6 +22,7 @@ class LoginVC: UIViewController {
         self.view.backgroundColor = .white
         self.initView()
         self.autoToHideKeyboard()
+        self.subscriptVM()
     }
 
 }
@@ -73,10 +77,8 @@ extension LoginVC {
         btnSubmit.layer.masksToBounds = true
         btnSubmit.clipsToBounds = true
         btnSubmit.setTitle("Login", for: .normal)
-        btnSubmit.setTitle("Loading...", for: .disabled)
         btnSubmit.backgroundColor = .black
         btnSubmit.setBackgroundImage(UIImage(color: #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)), for: .normal)
-        btnSubmit.setBackgroundImage(UIImage(color: #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 0.7798789321)), for: .disabled)
         btnSubmit.addTarget(self, action: #selector(self.onClickSubmitButton(_:)), for: .touchUpInside)
         self.btnSubmit = btnSubmit
         self.view.addSubview(btnSubmit)
@@ -85,8 +87,10 @@ extension LoginVC {
     }
     
     @objc private func onClickSubmitButton(_ button: UIButton) {
-//        self.viewModel?.login(account: "peter@klaven.com", password: "cityslicka123") { [weak self] token in
-        self.viewModel?.login(account: self.textAccount?.text ?? "", password: self.textPassword?.text ?? "") { [weak self] token in
+        self.showLoading()
+        self.viewModel?.login(account: "peter@klaven.com", password: "cityslicka123") { [weak self] token in
+//        self.viewModel?.login(account: self.textAccount?.text ?? "", password: self.textPassword?.text ?? "") { [weak self] token in
+            self?.showLoading(false)
             let resultVC = ResultVC()
             resultVC.setToken(token)
             self?.navigationController?.pushViewController(resultVC, animated: true)
@@ -109,11 +113,33 @@ extension LoginVC {
         self.viewModel?.apiFaildSubject.bind({ [weak self] _message in
             guard let message = _message else { return }
             DispatchQueue.main.async {
+                self?.showLoading(false)
                 let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self?.present(alert, animated: true, completion: nil)
             }
         })
+    }
+    
+    private func showLoading(_ show: Bool = true) {
+        if !show {
+            self.activityIndicator?.removeFromSuperview()
+            self.activityIndicator = nil
+            self.viewLoading?.removeFromSuperview()
+            self.viewLoading = nil
+        }else if self.viewLoading == nil{
+            let loadingView = UIView(frame: self.view.frame)
+            loadingView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+            let activityIndicator = UIActivityIndicatorView()
+            self.activityIndicator = activityIndicator
+            self.activityIndicator?.style = .white
+            self.activityIndicator?.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            self.activityIndicator?.center = loadingView.center
+            self.activityIndicator?.startAnimating()
+            self.viewLoading = loadingView
+            self.viewLoading?.addSubview(activityIndicator)
+            self.view.addSubview(loadingView)
+        }
     }
 }
 

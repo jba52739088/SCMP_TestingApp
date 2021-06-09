@@ -26,10 +26,13 @@ extension LoginRepository: LoginRepositoryInterface {
     func login(account: String, password: String, completion: @escaping (Result<LoginToken>) -> ()) {
         self.apiManager.login(account: account, password: password) { (status, data, response, error) in
             let decoder = JSONDecoder()
-            if status,
-               let jsonData = data,
+            if let jsonData = data,
                let result = try? decoder.decode(LoginToken.self, from: jsonData) {
-                completion(Result.success(result))
+                if status {
+                    completion(Result.success(result))
+                }else {
+                    completion(Result.failure(result.error))
+                }
             }else {
                 completion(Result.failure("api error"))
             }

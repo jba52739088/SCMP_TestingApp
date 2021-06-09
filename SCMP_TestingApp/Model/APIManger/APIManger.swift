@@ -14,7 +14,6 @@ enum HttpMethod: String {
     case  PUT
 }
 
-
 enum APPError: Error {
     case networkError(Error)
     case dataNotFound
