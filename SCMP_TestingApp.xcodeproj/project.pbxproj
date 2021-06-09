@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F944B0932670E92B00CECD6E /* Extension_UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F944B0922670E92B00CECD6E /* Extension_UIViewController.swift */; };
+		F944B0962670EC7C00CECD6E /* ResultVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F944B0952670EC7C00CECD6E /* ResultVM.swift */; };
 		F94545032670AAD5005DFF6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94545022670AAD5005DFF6A /* AppDelegate.swift */; };
 		F94545072670AAD5005DFF6A /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94545062670AAD5005DFF6A /* LoginVC.swift */; };
 		F945450A2670AAD5005DFF6A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94545082670AAD5005DFF6A /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		F944B0922670E92B00CECD6E /* Extension_UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_UIViewController.swift; sourceTree = "<group>"; };
+		F944B0952670EC7C00CECD6E /* ResultVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultVM.swift; sourceTree = "<group>"; };
 		F94544FF2670AAD5005DFF6A /* SCMP_TestingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SCMP_TestingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F94545022670AAD5005DFF6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F94545062670AAD5005DFF6A /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				F94545832670C5AE005DFF6A /* LoginVM.swift */,
+				F944B0952670EC7C00CECD6E /* ResultVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 				F944B0932670E92B00CECD6E /* Extension_UIViewController.swift in Sources */,
 				F94545322670BE4C005DFF6A /* APIManger.swift in Sources */,
 				F9AEF86C2670CB3E003EB7CF /* Subject.swift in Sources */,
+				F944B0962670EC7C00CECD6E /* ResultVM.swift in Sources */,
 				F94545262670BC0C005DFF6A /* ResultVC.swift in Sources */,
 				F94545072670AAD5005DFF6A /* LoginVC.swift in Sources */,
 				F94545032670AAD5005DFF6A /* AppDelegate.swift in Sources */,

@@ -9,12 +9,14 @@ import Foundation
 
 protocol LoginRepositoryInterface {
     func login(account: String, password: String, completion: @escaping (Result<LoginToken>) -> ())
+    var loginToken: LoginToken? { get }
 }
 
 class LoginRepository {
     static let shared = LoginRepository()
     
     let apiManager: APIManager
+    var loginToken: LoginToken?
     
     init(apiManager: APIManager = APIManager.shared) {
         self.apiManager = apiManager
@@ -27,11 +29,12 @@ extension LoginRepository: LoginRepositoryInterface {
         self.apiManager.login(account: account, password: password) { (status, data, response, error) in
             let decoder = JSONDecoder()
             if let jsonData = data,
-               let result = try? decoder.decode(LoginToken.self, from: jsonData) {
+               let token = try? decoder.decode(LoginToken.self, from: jsonData) {
                 if status {
-                    completion(Result.success(result))
+                    self.loginToken = token
+                    completion(Result.success(token))
                 }else {
-                    completion(Result.failure(result.error))
+                    completion(Result.failure(token.error))
                 }
             }else {
                 completion(Result.failure("api error"))

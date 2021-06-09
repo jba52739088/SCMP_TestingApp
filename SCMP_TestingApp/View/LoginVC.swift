@@ -88,11 +88,10 @@ extension LoginVC {
     
     @objc private func onClickSubmitButton(_ button: UIButton) {
         self.showLoading()
-        self.viewModel?.login(account: "peter@klaven.com", password: "cityslicka123") { [weak self] token in
-//        self.viewModel?.login(account: self.textAccount?.text ?? "", password: self.textPassword?.text ?? "") { [weak self] token in
+//        self.viewModel?.login(account: "peter@klaven.com", password: "cityslicka123") { [weak self] token in
+        self.viewModel?.login(account: self.textAccount?.text ?? "", password: self.textPassword?.text ?? "") { [weak self] token in
             self?.showLoading(false)
             let resultVC = ResultVC()
-            resultVC.setToken(token)
             self?.navigationController?.pushViewController(resultVC, animated: true)
         }
     }
@@ -114,7 +113,7 @@ extension LoginVC {
             guard let message = _message else { return }
             DispatchQueue.main.async {
                 self?.showLoading(false)
-                let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+                let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self?.present(alert, animated: true, completion: nil)
             }
